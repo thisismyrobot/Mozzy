@@ -202,8 +202,12 @@ public class AnimatedMozzy extends View implements OnTouchListener
              {
                  gx = random.nextInt(sw);
                  gy = random.nextInt(sh);
+                 timerHandler.postDelayed(this, getRandomDelay(1500, 5000));
              }
-             timerHandler.postDelayed(this, getRandomDelay(1500, 5000));
+             else
+             {
+                 timerHandler.postDelayed(this, 10);
+             }
          }
      };
 }
