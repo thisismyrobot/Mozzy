@@ -1,10 +1,11 @@
 package thisismyrobot.android.mozzy;
 
+import java.util.Random;
+
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.os.Handler;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
@@ -13,8 +14,8 @@ public class AnimatedMozzy extends View implements OnTouchListener
 {
     private boolean captured = false;
     private boolean flying = false;
-    private long mStartTime;
     private Handler timerHandler = new Handler();
+    Random random = new Random();
 
     public AnimatedMozzy(Context context)
     {
@@ -45,17 +46,15 @@ public class AnimatedMozzy extends View implements OnTouchListener
 
     private int getRandomDelay()
     {
-        return 1000;
+        int min = 500;
+        int max = 3000;
+        return random.nextInt(max - min) + min;
     }
 
     public void startAnimation()
     {
-        if (this.mStartTime == 0L)
-        {
-            this.mStartTime = System.currentTimeMillis();
-            timerHandler.removeCallbacks(updateAnimationType);
-            timerHandler.post(updateAnimationType);
-       }
+        timerHandler.removeCallbacks(updateAnimationType);
+        timerHandler.post(updateAnimationType);
     }
 
     private Runnable updateAnimationType = new Runnable()
