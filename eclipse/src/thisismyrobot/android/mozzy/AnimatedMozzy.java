@@ -72,38 +72,38 @@ public class AnimatedMozzy extends View implements OnTouchListener
         brush.setColor(Color.BLACK);
         brush.setStyle(Paint.Style.FILL);
         brush.setStrokeWidth(0);
-        canvas.drawOval(new RectF(x-1.5f, y-5, x+1.5f, y), brush);
-        canvas.drawOval(new RectF(x-1, y, x+1, y+8), brush);
+        canvas.drawOval(new RectF(x-3, y-10, x+3, y), brush);
+        canvas.drawOval(new RectF(x-2, y, x+2, y+16), brush);
 
         //front legs
-        canvas.drawLine(x, y, x+4, y-4, brush);
-        canvas.drawLine(x, y, x-4, y-4, brush);
-        canvas.drawLine(x+4, y-4, x+6, y-8, brush);
-        canvas.drawLine(x-4, y-4, x-6, y-8, brush);
+        canvas.drawLine(x, y, x+8, y-8, brush);
+        canvas.drawLine(x, y, x-8, y-8, brush);
+        canvas.drawLine(x+8, y-8, x+10, y-16, brush);
+        canvas.drawLine(x-8, y-8, x-10, y-16, brush);
 
         //middle legs
-        canvas.drawLine(x, y, x+6, y+2, brush);
-        canvas.drawLine(x, y, x-6, y+2, brush);
-        canvas.drawLine(x+6, y+2, x+7, y+6, brush);
-        canvas.drawLine(x-6, y+2, x-7, y+6, brush);
+        canvas.drawLine(x, y, x+10, y+4, brush);
+        canvas.drawLine(x, y, x-10, y+4, brush);
+        canvas.drawLine(x+10, y+4, x+14, y+14, brush);
+        canvas.drawLine(x-10, y+4, x-14, y+14, brush);
 
         //back legs
-        canvas.drawLine(x, y, x+3, y+4, brush);
-        canvas.drawLine(x, y, x-3, y+4, brush);
-        canvas.drawLine(x+3, y+4, x+4, y+12, brush);
-        canvas.drawLine(x-3, y+4, x-4, y+12, brush);
+        canvas.drawLine(x, y, x+6, y+8, brush);
+        canvas.drawLine(x, y, x-6, y+8, brush);
+        canvas.drawLine(x+6, y+8, x+8, y+24, brush);
+        canvas.drawLine(x-6, y+8, x-8, y+24, brush);
 
         //wings
         brush.setColor(Color.rgb(128, 128, 0));
         brush.setAlpha(64);
         brush.setStyle(Paint.Style.FILL);
-        canvas.drawOval(new RectF(x, y-1, x+14, y+3), brush);
-        canvas.drawOval(new RectF(x, y-1, x-14, y+3), brush);
+        canvas.drawOval(new RectF(x, y-2, x+28, y+6), brush);
+        canvas.drawOval(new RectF(x, y-2, x-28, y+6), brush);
         brush.setColor(Color.BLACK);
         brush.setAlpha(64);
         brush.setStyle(Paint.Style.STROKE);
-        canvas.drawOval(new RectF(x, y-1, x+14, y+3), brush);
-        canvas.drawOval(new RectF(x, y-1, x-14, y+3), brush);
+        canvas.drawOval(new RectF(x, y-2, x+28, y+6), brush);
+        canvas.drawOval(new RectF(x, y-2, x-28, y+6), brush);
     }
 
     private int getRandomDelay(int min, int max)
