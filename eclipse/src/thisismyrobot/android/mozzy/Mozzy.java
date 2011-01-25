@@ -8,13 +8,23 @@ import android.widget.LinearLayout;
 
 public class Mozzy extends Activity
 {
+    private AnimatedMozzy mozzy;
+
     @Override
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         this.getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        setContentView(R.layout.main);
-        ((LinearLayout)findViewById(R.id.main)).addView(new AnimatedMozzy(this));
+        this.setContentView(R.layout.main);
+        mozzy = new AnimatedMozzy(this);
+        ((LinearLayout)findViewById(R.id.main)).addView(mozzy);
+    }
+
+    public void onPause()
+    {
+        super.onPause();
+        mozzy.stopAnimations();
+        finish();
     }
 }

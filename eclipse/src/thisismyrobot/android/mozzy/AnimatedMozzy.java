@@ -7,6 +7,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.RectF;
+import android.media.MediaPlayer;
 import android.os.Handler;
 import android.view.MotionEvent;
 import android.view.View;
@@ -26,6 +27,7 @@ public class AnimatedMozzy extends View implements OnTouchListener
     private int sw;
     private int sh;
     private boolean firstdraw = true;
+    private MediaPlayer mp;
 
     public AnimatedMozzy(Context context)
     {
@@ -33,6 +35,8 @@ public class AnimatedMozzy extends View implements OnTouchListener
         this.setOnTouchListener(this);
         this.setKeepScreenOn(true);
         this.brush = new Paint(Paint.ANTI_ALIAS_FLAG);
+        mp = MediaPlayer.create(context, R.raw.loop);
+        mp.setLooping(true);
         startAnimations();
     }
 
@@ -43,6 +47,10 @@ public class AnimatedMozzy extends View implements OnTouchListener
         if(this.captured)
         {
             this.flying = false;
+            if(mp.isPlaying())
+            {
+                mp.pause();
+            }
         }
         return true;
     }
@@ -113,6 +121,18 @@ public class AnimatedMozzy extends View implements OnTouchListener
         timerHandler.post(updateGravity);
     }
 
+    public void stopAnimations()
+    {
+        timerHandler.removeCallbacks(updateAnimationType);
+        timerHandler.removeCallbacks(updatePosition);
+        timerHandler.removeCallbacks(updateGravity);
+        if(mp.isPlaying())
+        {
+            mp.stop();
+        }
+        mp.release();
+    }
+
     private Runnable updateAnimationType = new Runnable()
     {
         public void run()
@@ -124,6 +144,21 @@ public class AnimatedMozzy extends View implements OnTouchListener
             else
             {
                 flying = false;
+            }
+
+            if(flying)
+            {
+                if(!mp.isPlaying())
+                {
+                    mp.start();
+                }
+            }
+            else
+            {
+                if(mp.isPlaying())
+                {
+                    mp.pause();
+                }
             }
             timerHandler.postDelayed(this, getRandomDelay(500, 3000));
         }
